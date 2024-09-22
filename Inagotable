@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congreso Inagotable</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #001f3f; /* Azul oscuro */
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 3px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            font-family: 'Lucida Handwriting', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #001f3f; /* Azul oscuro */
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .verse {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .qr-code {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Congreso Inagotable</h1>
+        <h2>Esto te dice el Señor</h2>
+        <div class="verse" id="verse">Cargando versículo...</div>
+        <button id="saveVerse">Guardar Versículo</button>
+        <div class="qr-code">
+            <img src="ruta_a_tu_qr.png" alt="Escanea este QR">
+        </div>
+    </div>
+
+    <script>
+        // Array de versículos con promesas bíblicas, incluyendo sobre ser inagotables
+        const verses = [
+            "Isaías 40:31 - Pero los que confían en el Señor renovarán sus fuerzas; volarán como las águilas: correrán y no se fatigarán, caminarán y no se cansarán.",
+            "Filipenses 4:13 - Todo lo puedo en Cristo que me fortalece.",
+            "2 Corintios 12:9 - Y me ha dicho: Bástate mi gracia, porque mi poder se perfecciona en la debilidad.",
+            "Isaías 58:11 - El Señor te guiará siempre; te saciará en tierra reseca y fortalecerá tus huesos. Serás como un jardín bien regado, como un manantial cuyas aguas nunca faltan.",
+            "Salmos 73:26 - Mi carne y mi corazón desfallecen; mas la roca de mi corazón y mi porción es Dios para siempre.",
+            "Mateo 11:28 - Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.",
+            "Deuteronomio 31:6 - Sed fuertes y valientes, no temáis ni os aterrorizéis ante ellos, porque el Señor tu Dios va contigo; nunca te dejará ni te desamparará.",
+            "Josué 1:9 - Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas."
+        ];
+
+        // Función para mostrar un versículo aleatorio
+        function getRandomVerse() {
+            const randomIndex = Math.floor(Math.random() * verses.length);
+            document.getElementById('verse').textContent = verses[randomIndex];
+        }
+
+        // Función para guardar el versículo como un archivo de texto
+        function saveVerse() {
+            const verseText = document.getElementById('verse').textContent;
+            const blob = new Blob([verseText], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'promesa_bíblica.txt';
+            link.click();
+        }
+
+        // Mostrar un versículo al cargar la página
+        window.onload = getRandomVerse;
+
+        // Añadir evento para guardar el versículo
+        document.getElementById('saveVerse').addEventListener('click', saveVerse);
+    </script>
+</body>
+</html>
